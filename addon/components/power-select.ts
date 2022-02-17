@@ -18,7 +18,7 @@ import {
   pathForOption,
   MatcherFn
 } from '../utils/group-utils';
-import { restartableTask } from 'ember-concurrency-decorators';
+import { restartableTask } from 'ember-concurrency';
 // @ts-ignore
 import { timeout } from 'ember-concurrency';
 import { Dropdown, DropdownActions } from 'ember-basic-dropdown/addon/components/basic-dropdown';
@@ -143,7 +143,7 @@ export default class PowerSelect extends Component<PowerSelectArgs> {
     if (this._lastSelectedPromise && isPromiseProxyLike(this._lastSelectedPromise)) {
       try {
         removeObserver(this._lastSelectedPromise, 'content', this, this._selectedObserverCallback);
-      } catch {}
+      } catch { }
       this._lastSelectedPromise = undefined;
     }
     super.willDestroy.apply(this, arguments);
@@ -551,7 +551,7 @@ export default class PowerSelect extends Component<PowerSelectArgs> {
     let highlighted;
     let defHighlighted = this.args.defaultHighlighted || defaultHighlighted;
     if (typeof defHighlighted === 'function') {
-      highlighted = defHighlighted({ results: this.results, highlighted: this.highlighted, selected: this.selected});
+      highlighted = defHighlighted({ results: this.results, highlighted: this.highlighted, selected: this.selected });
     } else {
       highlighted = defHighlighted
     }
